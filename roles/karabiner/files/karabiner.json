@@ -2,9 +2,7 @@
     "profiles": [
         {
             "complex_modifications": {
-                "parameters": {
-                    "basic.to_if_alone_timeout_milliseconds": 500
-                },
+                "parameters": { "basic.to_if_alone_timeout_milliseconds": 500 },
                 "rules": [
                     {
                         "description": "Caps Lock to Hyper (Cmd+Ctrl+Alt+Shift), Escape if alone",
@@ -33,6 +31,15 @@
                         "is_pointing_device": true,
                         "product_id": 12292,
                         "vendor_id": 14000
+                    },
+                    "ignore": false
+                },
+                {
+                    "identifiers": {
+                        "is_keyboard": true,
+                        "is_pointing_device": true,
+                        "product_id": 2128,
+                        "vendor_id": 13364
                     },
                     "ignore": false
                 }
