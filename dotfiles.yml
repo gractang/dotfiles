@@ -59,6 +59,9 @@
     - role: aerospace
       tags:
         - aerospace
+    - role: karabiner
+      tags:
+        - karabiner
     - role: browsers
       tags:
         - browsers
