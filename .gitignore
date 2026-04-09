@@ -18,3 +18,7 @@ roles/agents/files/codex/.tmp/
 roles/agents/files/codex/tmp/
 roles/agents/files/codex/.personality_migration
 roles/agents/files/codex/skills/.system/
+
+# karabiner generated files
+roles/karabiner/files/assets/
+roles/karabiner/files/automatic_backups/
