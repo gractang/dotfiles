@@ -69,6 +69,7 @@ Roles execute in the order listed below. Each role is independently taggable.
 |------|-----|-------------|
 | **apps** | `apps` | Installs casks: Linear, Figma, Brain.fm, OrbStack, Notion |
 | **aerospace** | `aerospace` | Installs AeroSpace tiling WM (`nikitabobko/tap`). Symlinks config to `~/.config/aerospace/` |
+| **karabiner** | `karabiner` | Installs Karabiner-Elements. Symlinks config to `~/.config/karabiner/`. Remaps Caps Lock to hyper key (Cmd+Ctrl+Alt+Shift); tap alone sends Escape |
 | **browsers** | `browsers` | Installs Brave and Zen browsers |
 | **kitty** | `kitty` | Installs kitty terminal. Symlinks config and color scheme to `~/.config/kitty/` |
 | **ghostty** | `ghostty` | Installs Ghostty terminal. Symlinks config and themes to `~/.config/ghostty/` |
@@ -196,7 +197,8 @@ Gaps: 20px inner, 20px outer (65px top to accommodate sketchybar).
 3. **tmux** -- run `prefix + I` inside tmux to install TPM plugins on first launch
 4. **Neovim** -- open nvim and let Lazy sync plugins on first launch
 5. **AeroSpace** -- grant accessibility permissions when prompted on first launch
-6. **macOS defaults** -- some changes (Dock, Finder, Trackpad) require a logout/restart to fully take effect
+6. **Karabiner-Elements** -- grant accessibility and input monitoring permissions. Caps Lock becomes the hyper key for all AeroSpace bindings; tapping Caps Lock alone sends Escape
+7. **macOS defaults** -- some changes (Dock, Finder, Trackpad) require a logout/restart to fully take effect
 
 ## Customization
 
