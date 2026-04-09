@@ -12,11 +12,13 @@
   homebrew:
     name: sketchybar
 
-- name: Install SbarLua from source
+- name: Install SbarLua and Lua 5.5 from source
   shell: |
     git clone https://github.com/FelixKratz/SbarLua.git /tmp/SbarLua && \
     cd /tmp/SbarLua/ && \
     make install && \
+    cp lua-5.5.0/src/lua {{ ansible_env.HOME }}/.local/bin/lua5.5 && \
+    chmod +x {{ ansible_env.HOME }}/.local/bin/lua5.5 && \
     rm -rf /tmp/SbarLua/
   args:
     creates: "{{ ansible_env.HOME }}/.local/share/sketchybar_lua/sketchybar.so"
