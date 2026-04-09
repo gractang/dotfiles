@@ -188,7 +188,60 @@ Tiling WM with vim-style keybindings, all behind the hyper key (`Cmd+Shift+Ctrl+
 
 Floating exceptions: Telegram, Finder, Camera, Elgato, Discord, Mail, Trello, QuickTime.
 
-Gaps: 20px inner, 20px outer (65px top to accommodate sketchybar).
+| `hyper-left/right` | Focus monitor left/right |
+
+Workspaces 1-2 are pinned to the main (laptop) monitor, 3-4 to secondary (external). When the external is disconnected, all workspaces collapse onto the laptop.
+
+Gaps: 10px inner, 10px outer. Sketchybar sits flush at top.
+
+## Neovim
+
+LazyVim-based config with leader key = `Space`. Autoformat on save (toggle with `<leader>uf`).
+
+### Key bindings
+
+| Binding | Action |
+|---------|--------|
+| `Ctrl+h/j/k/l` | Navigate between nvim splits and tmux panes seamlessly |
+| `<leader>gg` | Toggle Diffview (git diff) |
+| `<leader>gh` | File git history (current file) |
+| `<leader>gH` | File git history (all) |
+| `<leader>fy` | Copy current file path to clipboard |
+| `<leader>9s` | 99 AI search (Claude Code) |
+| `<leader>9v` | 99 AI visual selection (Claude Code) |
+
+### Notable plugins
+
+- **smart-splits** -- seamless Ctrl+h/j/k/l navigation between nvim and tmux
+- **Diffview** -- in-editor git diffs and file history (replaces lazygit in nvim; lazygit still available via `Ctrl+g` in tmux)
+- **yazi** -- file manager
+- **flash** -- quick jump/navigation
+- **99** -- AI search/editing via Claude Code
+- **dropbar** -- breadcrumb navigation
+- **catppuccin** -- color scheme
+
+### Diagnostics
+
+Smart diagnostic display: virtual lines show on the current line for detail, virtual text shows elsewhere to reduce clutter.
+
+## tmux
+
+Prefix key is `` ` `` (backtick), not the default `Ctrl+b`.
+
+| Binding | Action |
+|---------|--------|
+| `` ` `` + `c` | New window |
+| `` ` `` + `,` | Rename window |
+| `Shift+Left/Right` | Previous/next window |
+| `` ` `` + `h` or `\|` | Horizontal split |
+| `` ` `` + `v` or `-` | Vertical split |
+| `Ctrl+h/j/k/l` | Navigate panes (shared with nvim) |
+| `` ` `` + `z` | Zoom pane (or nvim zoom if in nvim) |
+| `Ctrl+g` | Lazygit popup |
+| `` ` `` + `f` | Session switcher (cms) |
+| `` ` `` + `a` | Agent switcher (cms -a) |
+| `` ` `` + `x` | Kill pane |
+| `` ` `` + `s` | Choose session |
 
 ## Manual Steps After Bootstrap
 
