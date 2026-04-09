@@ -95,12 +95,18 @@ preset = 'qwerty'
 #                 In this example, 24 is a default value when there is no match.
 #                 Monitor pattern is the same as for 'workspace-to-monitor-force-assignment'.
 #                 See: https://nikitabobko.github.io/AeroSpace/guide#assign-workspaces-to-monitors
+[workspace-to-monitor-force-assignment]
+1 = 'main'
+2 = 'main'
+3 = ['secondary', 'main']
+4 = ['secondary', 'main']
+
 [gaps]
 inner.horizontal = 10
 inner.vertical =   10
 outer.left =       10
 outer.bottom =     10
-outer.top =        30
+outer.top =        [{ monitor."built-in" = 0 }, 42]
 outer.right =      10
 
 # 'main' binding mode declaration
@@ -162,6 +168,10 @@ cmd-shift-ctrl-alt-n = 'exec-and-forget open -n -a Ghostty'
 
 ### --- Fullscreen ---
 cmd-shift-ctrl-alt-f = 'fullscreen'
+
+### --- Monitor Focus ---
+cmd-shift-ctrl-alt-left = 'focus-monitor left'
+cmd-shift-ctrl-alt-right = 'focus-monitor right'
 
 ### --- Workspace Switching ---
 cmd-shift-ctrl-alt-1 = 'workspace 1'
