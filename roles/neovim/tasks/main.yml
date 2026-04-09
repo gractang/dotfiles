@@ -1,0 +1,33 @@
+- name: Add neovim plugin
+  command: asdf plugin add neovim
+  register: nvim_add
+  failed_when: nvim_add.rc not in [0, 2]
+
+- name: Check if nightly version is already installed
+  shell: asdf list neovim | grep -q nightly
+  register: nightly_check
+  failed_when: false
+  changed_when: false
+
+- name: Uninstall previous nightly version
+  command: asdf uninstall neovim nightly
+  when: nightly_check.rc == 0
+
+- name: Install neovim nightly
+  command: asdf install neovim nightly
+
+- name: Set nightly as the global neovim version
+  command: asdf set neovim nightly
+  args:
+    chdir: "{{ ansible_env.HOME }}"
+
+- name: Make sure config is up to date
+  file:
+    src: "{{ dotfiles_home }}/roles/neovim/files/"
+    dest: "{{ config }}/nvim"
+    state: link
+    force: yes
+
+- name: Record role in lockfile
+  command: "{{ playbook_dir }}/bin/lock-role {{ ansible_role_name }}"
+  changed_when: false

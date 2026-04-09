@@ -1,0 +1,59 @@
+- name: Check for Homebrew on Apple Silicon
+  stat:
+    path: /opt/homebrew/bin/brew
+  register: homebrew_arm_check
+
+- name: Check for Homebrew on Intel
+  stat:
+    path: /usr/local/bin/brew
+  register: homebrew_intel_check
+
+- name: Set Homebrew path (Apple Silicon)
+  set_fact:
+    homebrew_bin: /opt/homebrew/bin/brew
+    homebrew_prefix: /opt/homebrew
+  when: homebrew_arm_check.stat.exists
+
+- name: Set Homebrew path (Intel)
+  set_fact:
+    homebrew_bin: /usr/local/bin/brew
+    homebrew_prefix: /usr/local
+  when: homebrew_intel_check.stat.exists and not homebrew_arm_check.stat.exists
+
+- name: Installing Homebrew
+  shell: /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  when:
+    - not homebrew_arm_check.stat.exists
+    - not homebrew_intel_check.stat.exists
+
+- name: Determine Homebrew path after installation
+  shell: |
+    if [ -f /opt/homebrew/bin/brew ]; then
+      echo "/opt/homebrew"
+    else
+      echo "/usr/local"
+    fi
+  register: brew_prefix_result
+  changed_when: false
+  when: homebrew_prefix is not defined
+
+- name: Set Homebrew prefix after installation
+  set_fact:
+    homebrew_prefix: "{{ brew_prefix_result.stdout }}"
+    homebrew_bin: "{{ brew_prefix_result.stdout }}/bin/brew"
+  when: homebrew_prefix is not defined
+
+- name: Add Homebrew to PATH in .zprofile
+  lineinfile:
+    path: ~/.zprofile
+    line: 'eval "$({{ homebrew_prefix }}/bin/brew shellenv)"'
+    create: yes
+    state: present
+
+- name: Set Homebrew environment for current playbook
+  set_fact:
+    ansible_env: "{{ ansible_env | combine({'PATH': homebrew_prefix + '/bin:' + homebrew_prefix + '/sbin:' + ansible_env.PATH}) }}"
+
+- name: Record role in lockfile
+  command: "{{ playbook_dir }}/bin/lock-role {{ ansible_role_name }}"
+  changed_when: false

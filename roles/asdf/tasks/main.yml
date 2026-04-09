@@ -1,0 +1,21 @@
+- name: Install asdf
+  homebrew:
+    name: asdf
+    state: present
+
+- name: Verify asdf is available
+  command: asdf --version
+  register: asdf_version
+  changed_when: false
+
+- name: Display asdf version
+  debug:
+    msg: "asdf {{ asdf_version.stdout }} is installed and available"
+
+- name: Set asdf shims in Ansible PATH
+  set_fact:
+    ansible_env: "{{ ansible_env | combine({'PATH': ansible_env.HOME + '/.asdf/shims:' + ansible_env.PATH}) }}"
+
+- name: Record role in lockfile
+  command: "{{ playbook_dir }}/bin/lock-role {{ ansible_role_name }}"
+  changed_when: false

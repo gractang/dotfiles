@@ -1,0 +1,70 @@
+- name: Install tmux
+  homebrew:
+    name: tmux
+
+- name: Tap ser-ge/tap for cms
+  homebrew_tap:
+    name: ser-ge/tap
+    state: present
+
+- name: Install cms (tmux session manager)
+  homebrew:
+    name: ser-ge/tap/cms
+    state: present
+
+- name: Install tmuxinator
+  homebrew:
+    name: tmuxinator
+
+# tmux config
+- name: Install TPM (Tmux Plugin Manager)
+  git:
+    repo: https://github.com/tmux-plugins/tpm
+    dest: ~/.tmux/plugins/tpm
+    depth: 1
+
+- name: tmux - link config file
+  file:
+    src: "{{ dotfiles_home }}/roles/tmux/files/tmux.conf"
+    dest: "~/.tmux.conf"
+    state: link
+    force: yes
+
+- name: Tmux - Check if config exists
+  stat: path="{{ config }}/tmux"
+  register: tmux_config_stat
+
+- name: Tmux - Back up config
+  command: "mv {{ config }}/tmux {{ config }}/tmux_old"
+  args:
+    creates: "{{ config }}/tmux_old"
+  when: tmux_config_stat.stat.exists
+
+- name: Tmux - Make sure config is up to date
+  file:
+    src: "{{ dotfiles_home }}/roles/tmux/files/tmux/"
+    dest: "{{ config }}/tmux"
+    state: link
+    force: yes
+
+# tmuxinator config
+- name: Tmuxinator - Check if config exists
+  stat: path="{{ config }}/tmuxinator"
+  register: tmuxinator_config_stat
+
+- name: Tmuxinator - Back up config
+  command: "mv {{ config }}/tmuxinator {{ config }}/tmuxinator_old"
+  args:
+    creates: "{{ config }}/tmuxinator_old"
+  when: tmuxinator_config_stat.stat.exists
+
+- name: Tmuxinator - Make sure config is up to date
+  file:
+    src: "{{ dotfiles_home }}/roles/tmux/files/tmuxinator/"
+    dest: "{{ config }}/tmuxinator"
+    state: link
+    force: yes
+
+- name: Record role in lockfile
+  command: "{{ playbook_dir }}/bin/lock-role {{ ansible_role_name }}"
+  changed_when: false

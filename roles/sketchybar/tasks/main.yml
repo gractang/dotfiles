@@ -1,0 +1,69 @@
+- name: Prepare to install sketchybar
+  homebrew_tap:
+    name: FelixKratz/formulae
+
+- name: Install SF-Symbols
+  community.general.homebrew_cask:
+    name: sf-symbols
+    state: present
+    sudo_password: "{{ become_password }}"
+
+- name: Install sketchybar
+  homebrew:
+    name: sketchybar
+
+- name: Install SbarLua from source
+  shell: |
+    git clone https://github.com/FelixKratz/SbarLua.git /tmp/SbarLua && \
+    cd /tmp/SbarLua/ && \
+    make install && \
+    rm -rf /tmp/SbarLua/
+  args:
+    creates: "{{ ansible_env.HOME }}/.local/share/sketchybar_lua/sketchybar.so"
+
+- name: Check if config exists
+  stat: path="{{ config }}/sketchybar"
+  register: sketchybar_config_stat
+
+- name: Back up config
+  command: "mv {{ config }}/sketchybar {{ config }}/sketchybar_old"
+  args:
+    creates: "{{ config }}/sketchybar_old"
+  when: sketchybar_config_stat.stat.exists
+
+- name: Make sure config is up to date
+  file:
+    src: "{{ dotfiles_home }}/roles/sketchybar/files/"
+    dest: "{{ config }}/sketchybar"
+    state: link
+    force: yes
+
+- name: Ensure LaunchAgents directory exists
+  file:
+    path: "{{ ansible_env.HOME }}/Library/LaunchAgents"
+    state: directory
+    mode: '0755'
+
+- name: Deploy custom plist with correct PATH
+  template:
+    src: homebrew.mxcl.sketchybar.plist.j2
+    dest: "{{ ansible_env.HOME }}/Library/LaunchAgents/homebrew.mxcl.sketchybar.plist"
+    mode: '0644'
+  register: plist_deployed
+
+- name: Stop sketchybar service if running
+  command: brew services stop sketchybar
+  when: plist_deployed.changed
+  failed_when: false
+
+- name: Unload existing plist if present
+  command: launchctl unload {{ ansible_env.HOME }}/Library/LaunchAgents/homebrew.mxcl.sketchybar.plist
+  when: plist_deployed.changed
+  failed_when: false
+
+- name: Load sketchybar service
+  command: launchctl load -w {{ ansible_env.HOME }}/Library/LaunchAgents/homebrew.mxcl.sketchybar.plist
+
+- name: Record role in lockfile
+  command: "{{ playbook_dir }}/bin/lock-role {{ ansible_role_name }}"
+  changed_when: false

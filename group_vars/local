@@ -1,0 +1,8 @@
+dotfiles_user_home: "{{ '~' | expanduser }}"
+dotfiles_home: "{{ dotfiles_user_home }}/dotfiles"
+config: "{{ dotfiles_user_home }}/.config"
+target_user_id: gracetang
+
+full_name: Grace Tang
+git_user: gractang
+git_email: gtang@hex.tech

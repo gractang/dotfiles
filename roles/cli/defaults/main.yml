@@ -1,0 +1,14 @@
+tools:
+  - prettyping
+  - bat
+  - htop
+  - fzf
+  - git-delta
+  - tldr
+  - ripgrep
+  - gnu-sed
+  - pgcli
+  - mycli
+  - lazydocker
+  - lastpass-cli
+  - entr

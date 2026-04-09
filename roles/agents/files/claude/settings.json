@@ -1,0 +1,144 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git show *)",
+      "Bash(git log *)",
+      "Bash(git log *|*)",
+      "Bash(git diff *)",
+      "Bash(git diff *|*)",
+      "Bash(git status)",
+      "Bash(git branch *)",
+      "Bash(ls *)",
+      "Bash(ls)",
+      "Bash(/Users/gracetang/.claude/skills/remindme/scripts/remind.sh *)",
+      "Bash(echo \"terminal-notifier*)",
+      "Bash(echo *| at *)",
+      "Read(claude/**)",
+      "Read(.claude/**)"
+    ]
+  },
+  "model": "opus[1m]",
+  "hooks": {
+    "Notification": [
+      {
+        "matcher": "idle_prompt",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "osascript -e 'display notification \"Claude Code is done\" with title \"Claude Code\" sound name \"Glass\"'"
+          }
+        ]
+      },
+      {
+        "matcher": "permission_prompt",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "osascript -e 'display notification \"Claude Code needs permission\" with title \"Claude Code\" sound name \"Ping\"'"
+          }
+        ]
+      },
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "printf '\\a' > /dev/tty 2>/dev/null; terminal-notifier -title 'Claude Code' -message '$CLAUDE_NOTIFICATION_MESSAGE' -sound default 2>/dev/null || true",
+            "timeout": 5
+          }
+        ]
+      },
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/opt/homebrew/bin/cms internal hook --socket /var/folders/q7/bys9dr7d1wj1q0f3689g_sdr0000gn/T/cms-501.sock notification",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/opt/homebrew/bin/cms internal hook --socket /var/folders/q7/bys9dr7d1wj1q0f3689g_sdr0000gn/T/cms-501.sock pre-tool-use",
+            "timeout": 5,
+            "async": true
+          }
+        ]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/opt/homebrew/bin/cms internal hook --socket /var/folders/q7/bys9dr7d1wj1q0f3689g_sdr0000gn/T/cms-501.sock session-end",
+            "timeout": 1
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/opt/homebrew/bin/cms internal hook --socket /var/folders/q7/bys9dr7d1wj1q0f3689g_sdr0000gn/T/cms-501.sock session-start",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/opt/homebrew/bin/cms internal hook --socket /var/folders/q7/bys9dr7d1wj1q0f3689g_sdr0000gn/T/cms-501.sock stop",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/opt/homebrew/bin/cms internal hook --socket /var/folders/q7/bys9dr7d1wj1q0f3689g_sdr0000gn/T/cms-501.sock prompt-submit",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "npx -y @owloops/claude-powerline@latest --style=minimal"
+  },
+  "extraKnownMarketplaces": {
+    "openai-codex": {
+      "source": {
+        "source": "github",
+        "repo": "openai/codex-plugin-cc"
+      }
+    }
+  },
+  "enabledPlugins": {
+    "codex@openai-codex": true,
+    "code-review@claude-plugins-official": true,
+    "frontend-design@claude-plugins-official": true,
+    "lua-lsp@claude-plugins-official": true,
+    "rust-analyzer-lsp@claude-plugins-official": true,
+    "typescript-lsp@claude-plugins-official": true
+  }
+}

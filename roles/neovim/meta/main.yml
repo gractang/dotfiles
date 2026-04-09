@@ -1,0 +1,5 @@
+dependencies:
+  - role: asdf
+  - role: ruby
+  - role: JavaScript
+  - role: lua

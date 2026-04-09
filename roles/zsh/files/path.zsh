@@ -1,0 +1,18 @@
+export PATH=${PATH}:$ZSH/bin
+export PATH="$HOME/dotfiles/bin:$PATH"
+export PATH=$PATH:/$HOME/.dotfiles/bin
+export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/.cargo/bin:$PATH"
+export PATH="$HOME/.config/zsh/bin:$PATH"
+
+function print_path() {
+    echo $PATH | sed $'s/:/\\\n/g'
+}
+
+# pnpm
+export PNPM_HOME="$HOME/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end

@@ -1,0 +1,87 @@
+- name: Set up local workstation
+  hosts: local
+  vars_prompt:
+    - name: become_password
+      prompt: "Enter your sudo password"
+      private: yes
+  vars:
+    ansible_become_password: "{{ become_password }}"
+  roles:
+    # ====================
+    #   Tools
+    # ====================
+    - role: config
+      tags:
+        - config
+    - role: homebrew
+      tags:
+        - homebrew
+    - role: git
+      tags:
+        - git
+    - role: asdf
+      tags:
+        - asdf
+    - role: devbox
+      tags:
+        - devbox
+    - role: JavaScript
+      tags:
+        - javascript
+    - role: cli
+      tags:
+        - cli
+    - role: zsh
+      tags:
+        - zsh
+    - role: tmux
+      tags:
+        - tmux
+    - role: pgcli
+      tags:
+        - pgcli
+    - role: mycli
+      tags:
+        - mycli
+    - role: agents
+      tags:
+        - agents
+    - role: neovim
+      tags:
+        - neovim
+
+    # ====================
+    #   Apps
+    # ====================
+    - role: apps
+      tags:
+        - apps
+    - role: aerospace
+      tags:
+        - aerospace
+    - role: browsers
+      tags:
+        - browsers
+    - role: kitty
+      tags:
+        - kitty
+    - role: ghostty
+      tags:
+        - ghostty
+    - role: sol
+      tags:
+        - sol
+
+    # ====================
+    #   Desktop
+    # ====================
+    - role: sketchybar
+      tags:
+        - sketchybar
+
+    # ====================
+    #   System
+    # ====================
+    - role: macos
+      tags:
+        - macos

@@ -1,0 +1,24 @@
+# Ignore everything by default
+*
+
+# Keep configuration files
+!.gitignore
+!CLAUDE.md
+!settings.json
+!keybindings.json
+
+# Keep rules
+!rules/
+!rules/**
+
+# Keep agents
+!agents/
+!agents/**
+
+# Keep skills
+!skills/
+!skills/**
+
+# Keep plugin config (not runtime data)
+!plugins/
+!plugins/config.json
