@@ -32,7 +32,7 @@
   - name: "Dock - Appearance"
     osx_defaults: { domain: 'com.apple.dock', key: "{{ item.key }}", type: "{{ item.type }}", value: "{{ item.value }}" }
     loop:
-      - { key: 'tilesize',                 type: 'int',     value: '{{ Dock_TileSize }}'}
+      - { key: 'tilesize',                 type: 'float',   value: '{{ Dock_TileSize }}'}
       - { key: 'magnification',            type: 'bool',    value: '{{ Dock_Magnification }}'}
       - { key: 'largesize',                type: 'float',   value: '{{ Dock_LargeSize }}'}
       - { key: 'orientation',              type: 'string',  value: '{{ Dock_Orientation }}'}

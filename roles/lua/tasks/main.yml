@@ -6,6 +6,8 @@
 - name: Install lua versions
   command: asdf install lua {{item}}
   loop: "{{versions}}"
+  environment:
+    ASDF_LUA_LUAROCKS_VERSION: "3.12.2"
   register: lua_install
   failed_when: lua_install.rc != 0 and "is already installed" not in lua_install.stderr
 
