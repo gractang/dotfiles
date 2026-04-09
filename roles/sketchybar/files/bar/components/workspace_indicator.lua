@@ -17,7 +17,7 @@ local function workspace_indicator()
   for i = 1, WORKSPACE_COUNT do
     local workspace_item = Item:new('item', 'workspace_' .. i, 'center')
     workspace_item:set {
-      position = 'center',
+      position = 'left',
       icon = { drawing = false },
       label = { drawing = false },
       background = {
@@ -41,7 +41,7 @@ local function workspace_indicator()
     if i < WORKSPACE_COUNT then
       local spacer = Item:new('item', 'workspace_spacer_' .. i, 'center')
       spacer:set {
-        position = 'center',
+        position = 'left',
         icon = { drawing = false },
         label = { drawing = false },
         background = { drawing = false },
