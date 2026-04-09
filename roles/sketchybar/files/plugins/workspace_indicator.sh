@@ -3,30 +3,30 @@
 # Workspace indicator script
 # Updates the workspace ovals based on current AeroSpace workspace
 
-# Get current workspace from command line arg, environment variable, or aerospace command
-if [ -n "$1" ]; then
-    CURRENT_WORKSPACE="$1"
-elif [ -n "$AEROSPACE_FOCUSED_WORKSPACE" ]; then
-    CURRENT_WORKSPACE="$AEROSPACE_FOCUSED_WORKSPACE"
-else
-    # Fallback to aerospace command
-    CURRENT_WORKSPACE=$(aerospace list-workspaces --focused 2>/dev/null)
-fi
+FOCUSED_WORKSPACE=$(aerospace list-workspaces --focused 2>/dev/null)
+
+# Get workspace visible on each monitor
+MONITOR_WORKSPACES=$(aerospace list-workspaces --monitor all --visible 2>/dev/null)
 
 # If still no workspace, default to 1
-if [ -z "$CURRENT_WORKSPACE" ]; then
-  CURRENT_WORKSPACE="1"
+if [ -z "$FOCUSED_WORKSPACE" ]; then
+  FOCUSED_WORKSPACE="1"
 fi
 
 # Update all workspace indicators
 for i in {1..4}; do
-  if [ "$i" = "$CURRENT_WORKSPACE" ]; then
-    # Active workspace - make it twice as wide with faster animation
+  if [ "$i" = "$FOCUSED_WORKSPACE" ]; then
+    # Focused workspace - wide and bright
     sketchybar --animate tanh 8 \
                --set workspace_$i width=24 \
                background.color=0xffffffff
+  elif echo "$MONITOR_WORKSPACES" | grep -qx "$i"; then
+    # Visible on another monitor - wide but dimmed
+    sketchybar --animate tanh 8 \
+               --set workspace_$i width=24 \
+               background.color=0x66ffffff
   else
-    # Inactive workspace - normal width with faster animation
+    # Not visible - narrow
     sketchybar --animate tanh 8 \
                --set workspace_$i width=12 \
                background.color=0xffffffff

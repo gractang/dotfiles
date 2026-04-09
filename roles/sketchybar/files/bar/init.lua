@@ -2,6 +2,7 @@
 --- This demonstrates how to use the modular component system
 
 local Bar = require('lib').Bar
+local Item = require('lib').Item
 local Event = require('lib').Event
 local colors = require('colors')
 
@@ -100,6 +101,12 @@ function M.setup()
     -- left
     apple = apple(),
     mode_indicator = mode_indicator(),
+    workspace_spacer = Item:new('item', 'workspace_left_spacer', 'left', {
+      icon = { drawing = false },
+      label = { drawing = false },
+      background = { drawing = false },
+      width = 10,
+    }),
 
     --center
     workspace_indicator = workspace_indicator(),
