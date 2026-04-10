@@ -1,5 +1,5 @@
 theme               = Rose Pine
-background-opacity  = 1
+background-opacity  = 0.85
 background-blur     = 85
 
 window-theme = dark
