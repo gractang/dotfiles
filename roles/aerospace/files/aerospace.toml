@@ -2,8 +2,7 @@ after-startup-command = ['exec-and-forget sketchybar']
 
 # Notify Sketchybar about workspace change
 exec-on-workspace-change = ['/bin/bash', '-c',
-  'sketchybar --trigger aerospace_workspace_change FOCUSED_WORKSPACE=$AEROSPACE_FOCUSED_WORKSPACE',
-  'exec-and-forget borders active_color=0xffe1e3e4 inactive_color=0xff494d64 width=5.0'
+  'sketchybar --trigger aerospace_workspace_change FOCUSED_WORKSPACE=$AEROSPACE_FOCUSED_WORKSPACE && borders active_color=0xffe1e3e4 inactive_color=0xff494d64 width=5.0'
 ]
 
 # Start AeroSpace at login
@@ -98,15 +97,16 @@ preset = 'qwerty'
 [workspace-to-monitor-force-assignment]
 1 = 'main'
 2 = 'main'
-3 = ['secondary', 'main']
+3 = 'main'
 4 = ['secondary', 'main']
+5 = ['secondary', 'main']
 
 [gaps]
 inner.horizontal = 10
 inner.vertical =   10
 outer.left =       10
 outer.bottom =     10
-outer.top =        [{ monitor."built-in" = 0 }, 42]
+outer.top =        [{ monitor."built-in" = 10 }, 50]
 outer.right =      10
 
 # 'main' binding mode declaration
@@ -178,6 +178,7 @@ cmd-shift-ctrl-alt-1 = 'workspace 1'
 cmd-shift-ctrl-alt-2 = 'workspace 2'
 cmd-shift-ctrl-alt-3 = 'workspace 3'
 cmd-shift-ctrl-alt-4 = 'workspace 4'
+cmd-shift-ctrl-alt-5 = 'workspace 5'
 alt-tab = 'workspace-back-and-forth'
 
 ### --- Move Window to Workspace (and follow) ---
@@ -210,4 +211,5 @@ esc = ['mode main', 'exec-and-forget ~/.config/sketchybar/plugins/aerospace_mode
 2 = 'move-node-to-workspace 2 --focus-follows-window'
 3 = 'move-node-to-workspace 3 --focus-follows-window'
 4 = 'move-node-to-workspace 4 --focus-follows-window'
+5 = 'move-node-to-workspace 5 --focus-follows-window'
 esc = ['mode main', 'exec-and-forget ~/.config/sketchybar/plugins/aerospace_mode.sh main']

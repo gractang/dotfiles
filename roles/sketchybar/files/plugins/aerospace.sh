@@ -1,11 +1,7 @@
 #!/usr/bin/env bash
 
-echo \$FOCUSED_WORKSPACE: $FOCUSED_WORKSPACE, \$NAME: $NAME \$1: $1 >> ~/aaaa
-
 if [ "$1" = "$FOCUSED_WORKSPACE" ]; then
-    sketchybar --set $NAME background.drawing=on
+  sketchybar --set $NAME background.border_width=2 icon.color=0xffffffff label.color=0xffffffff
 else
-    sketchybar --set $NAME background.drawing=off
+  sketchybar --set $NAME background.border_width=0 icon.color=0xbbffffff label.color=0xbbffffff
 fi
-
-# Commented out sections include additional logic for handling window and workspace changes
