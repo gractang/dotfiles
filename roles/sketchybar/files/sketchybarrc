@@ -11,7 +11,7 @@ default=(
   padding_left=5
   padding_right=5
   icon.font="Hack Nerd Font:Bold:17.0"
-  label.font="SF Pro:Semibold:17.0"
+  label.font="Hack Nerd Font:Bold:17.0"
   icon.color=$WHITE
   label.color=$WHITE
   icon.padding_left=4
@@ -28,7 +28,7 @@ sketchybar --add item mode_indicator left \
     icon.drawing=off \
     label="Main" \
     label.color=0xffffffff \
-    label.font="SF Pro:Bold:14.0" \
+    label.font="Hack Nerd Font:Bold:14.0" \
     label.padding_left=10 \
     label.padding_right=10 \
     background.color=0x55000000 \
