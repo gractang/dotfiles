@@ -196,29 +196,57 @@ Gaps: 10px inner, 10px outer. Sketchybar sits flush at top.
 
 ## Neovim
 
-LazyVim-based config with leader key = `Space`. Autoformat on save (toggle with `<leader>uf`).
+LazyVim-based config with leader key = `Space`. Autoformat on save (toggle with `<leader>uf`). Theme: Rose Pine with transparency.
 
-### Key bindings
+### Plugins
 
-| Binding | Action |
-|---------|--------|
-| `Ctrl+h/j/k/l` | Navigate between nvim splits and tmux panes seamlessly |
-| `<leader>gg` | Toggle Diffview (git diff) |
-| `<leader>gh` | File git history (current file) |
-| `<leader>gH` | File git history (all) |
-| `<leader>fy` | Copy current file path to clipboard |
-| `<leader>9s` | 99 AI search (Claude Code) |
-| `<leader>9v` | 99 AI visual selection (Claude Code) |
+#### Editor Core
 
-### Notable plugins
+| Plugin | What it does | Key bindings |
+|--------|-------------|--------------|
+| **flash** | Fast jump/motion with visual labels. Replaces default `s`/`S`/`t`/`T` | `f` jump, `F` treesitter jump, `r` remote flash (operator pending), `R` treesitter search, `Ctrl+s` toggle flash in search |
+| **surround** | Add, change, and delete surrounding characters (quotes, brackets, tags). Treesitter-aware for intelligent matching | `ys{motion}{char}` add, `cs{old}{new}` change, `ds{char}` delete |
+| **wildfire** | Progressive text selection that expands outward using treesitter syntax trees | Enter to expand, Backspace to contract |
+| **illuminate** | Highlights all references to the word under cursor using LSP. Zero delay, 2000 line file cutoff | `]]` next reference, `[[` previous reference |
+| **numb** | Previews the target line in-place when typing `:{number}` in command mode | Automatic -- just type `:123` |
+| **dropbar** | Breadcrumb navigation bar showing file path and code symbols at the top of each window. Different sources for markdown (headings) vs code (LSP/treesitter) | `<leader>;` pick symbols, `[;` goto context start, `];` select next context |
+| **recall** | Persistent marks with visual gutter indicators and a picker UI | `<leader>mm` toggle mark, `<leader>mn`/`<leader>mp` next/prev, `Tab`/`Shift+Tab` navigate, `<leader>mc` clear all, `<leader>mo` open picker |
 
-- **smart-splits** -- seamless Ctrl+h/j/k/l navigation between nvim and tmux
-- **Diffview** -- in-editor git diffs and file history (replaces lazygit in nvim; lazygit still available via `Ctrl+g` in tmux)
-- **yazi** -- file manager
-- **flash** -- quick jump/navigation
-- **99** -- AI search/editing via Claude Code
-- **dropbar** -- breadcrumb navigation
-- **catppuccin** -- color scheme
+#### Git
+
+| Plugin | What it does | Key bindings |
+|--------|-------------|--------------|
+| **fugitive** | Full git wrapper -- stage, commit, push, pull, blame, browse without leaving the editor | `<leader>gs` status, `<leader>gp` push, `<leader>gP` pull, `<leader>gb` blame, `<leader>gB` browse, `<leader>gw` stage, `<leader>gr` checkout |
+| **gitsigns** | Git change indicators in the gutter with inline hunk previews and staging | `<leader>gp` preview inline, `<leader>gP` preview float, `<leader>hs` stage hunk, `<leader>hr` reset hunk, `]h`/`[h` next/prev hunk |
+| **diffview** | Side-by-side visual diff viewer with a file tree panel. Replaces lazygit inside nvim (lazygit still available via `Ctrl+g` in tmux) | `<leader>gg` toggle diffview, `<leader>gh` current file history, `<leader>gH` all file history |
+| **git-commit-float** | Opens a floating window for writing commit messages instead of a full buffer split | `<leader>gc` open commit window |
+
+#### Navigation and Windows
+
+| Plugin | What it does | Key bindings |
+|--------|-------------|--------------|
+| **smart-splits** | Seamless navigation between nvim splits and tmux panes. Manages the tmux `@pane-is-vim` flag automatically | `Ctrl+h/j/k/l` navigate splits/panes, `Alt+=`/`Alt+-` grow/shrink, `<leader>w{h/j/k/l}` swap buffer in direction |
+| **yazi** | Yazi file manager in a floating window (90% screen). Solid background matching Telescope style | `<leader>e` open at current file, `<leader>E` open at working directory, `F1` help |
+| **glance** | Peek at definitions, references, type definitions, and implementations in a split without jumping away. Right-side panel at 33% width | `gD` definitions, `gR` references, `gY` type definitions, `gI` implementations |
+| **snacks** | LazyVim's UI framework providing notifications, pickers, and other UI components | `<leader>sn` notifications |
+
+#### Language and LSP
+
+| Plugin | What it does | Key bindings |
+|--------|-------------|--------------|
+| **lsp** | Patches nvim-lspconfig to re-trigger LspAttach when servers register dynamic capabilities (codeAction, rename, inlayHints) after the initial handshake | Automatic |
+| **typescript** | vtsls TypeScript/JavaScript language server with 8GB memory limit for both TS and JS to prevent OOM in large projects | Standard LSP bindings |
+| **rust** | rustaceanvim with smart rust-analyzer resolution -- skips asdf-managed binaries, prefers system install, falls back to rustup | Standard LSP bindings |
+| **toml** | Taplo TOML language server. Detaches from non-file URIs for cleaner editing | Standard LSP bindings |
+| **neotest** | Integrated test runner with Jest and Rust adapters. Jest config handles monorepo structure by finding `jest.config.js` in package directories | LazyVim default neotest bindings |
+
+#### Other
+
+| Plugin | What it does | Key bindings |
+|--------|-------------|--------------|
+| **99** | AI code assistant powered by Claude Code. Uses Blink for completions | `<leader>9s` search, `<leader>9v` visual selection, `<leader>9x` stop, `<leader>9o` open last, `<leader>9m` select model, `<leader>9p` select provider |
+| **colorscheme** | Rose Pine theme (main variant) with transparency enabled and italics disabled | -- |
+| **global-note** | Quick scratchpad in a floating window (70% width, 85% height) with autosave. Notes stored in `~/.local/share/nvim/global-note/global.md` | `<leader>n` toggle note |
 
 ### Diagnostics
 
