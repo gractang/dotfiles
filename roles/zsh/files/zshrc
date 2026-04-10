@@ -1,3 +1,9 @@
+# Clear stale TMUX from Ghostty restored sessions
+# window-save-state persists env vars, so TMUX leaks into non-tmux windows
+if [[ -n "$TMUX" && "$TERM" != tmux-* && "$TERM" != screen* ]]; then
+  unset TMUX TMUX_PANE
+fi
+
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
