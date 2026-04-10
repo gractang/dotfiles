@@ -1,7 +1,7 @@
 # /Users/hogan.mcdonald/.config/tmuxinator/dotfiles.yml
 
 name: dotfiles
-root: ~/system
+root: ~/dotfiles
 
 # Optional tmux socket
 # socket_name: foo

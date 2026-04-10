@@ -20,3 +20,7 @@ alias be='bundle exec'
 
 # ruby
 alias rubocop='bundle exec rubocop'
+
+# claude code: unset TMUX to prevent chalk from downgrading truecolor to 256-color
+# see https://github.com/anthropics/claude-code/issues/35148
+claude() { TMUX= command claude "$@"; }

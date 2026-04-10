@@ -61,7 +61,7 @@ Roles execute in the order listed below. Each role is independently taggable.
 
 #### CLI tools installed
 
-`prettyping`, `bat`, `htop`, `fzf`, `git-delta`, `tldr`, `ripgrep`, `gnu-sed`, `pgcli`, `mycli`, `lazydocker`, `lastpass-cli`, `entr`
+`prettyping`, `bat`, `htop`, `fzf`, `git-delta`, `tldr`, `ripgrep`, `gnu-sed`, `pgcli`, `mycli`, `lazydocker`, `lastpass-cli`, `entr`, `yazi`
 
 ### Apps
 
@@ -242,6 +242,36 @@ Prefix key is `` ` `` (backtick), not the default `Ctrl+b`.
 | `` ` `` + `a` | Agent switcher (cms -a) |
 | `` ` `` + `x` | Kill pane |
 | `` ` `` + `s` | Choose session |
+
+## Claude Code Powerline
+
+The status line uses `@owloops/claude-powerline` (powerline style). Here's what each symbol means:
+
+| Symbol | Meaning |
+|--------|---------|
+| `⧉` | In a git worktree |
+| ` ` | Current git branch |
+| `⌂` | Current git tag |
+| `♯` | Current commit SHA |
+| `→` | Commits ahead/behind upstream |
+| `⧇` | Stashed changes |
+| `◷` | Time of last commit |
+| `§` | Session cost |
+| `◱` | Last response block cost |
+| `☉` | Total cost today |
+| `◑` | Total cost this week |
+| `◔` | Context time |
+| `⧖` | Response time |
+| `Δ` | Last response time |
+| `⧗` | Session duration |
+| `◆` | Message count |
+| `+` / `-` | Lines added / removed |
+| `↗` | Token burn rate |
+| `◈` | Claude Code version |
+| `⚙` | Environment |
+| `⌗` | Session ID |
+
+Not all symbols display at once -- visibility depends on what's relevant to the current session.
 
 ## Manual Steps After Bootstrap
 

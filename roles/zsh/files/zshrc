@@ -114,4 +114,5 @@ source $HOME/.config/zsh/includes.zsh
 eval "$(starship init zsh)"
 
 export EDITOR="nvim"
+export COLORTERM=truecolor
 export PATH="$HOME/.local/bin:$PATH"
