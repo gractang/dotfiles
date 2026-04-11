@@ -11,7 +11,7 @@ window-save-state = always
 macos-option-as-alt = true
 
 font-family         = "JetBrains Mono Nerd Font"
-font-size           = 12
+font-size           = 20
 font-feature        = "calt,liga,dlig"
 
 term                = xterm-ghostty
