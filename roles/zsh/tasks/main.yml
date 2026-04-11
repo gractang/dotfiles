@@ -49,6 +49,36 @@
     dest: "{{dotfiles_user_home}}/.zshrc"
     state: link
     force: yes
+- name: Check for .zshenv
+  stat: path="{{ dotfiles_user_home }}/.zshenv"
+  register: zshenv_stat
+- name: Back up .zshenv
+  command: mv ~/.zshenv ~/.zshenv.bak
+  args:
+    creates: "{{ dotfiles_user_home }}/.zshenv.bak"
+  when: zshenv_stat.stat.exists and not zshenv_stat.stat.islnk
+- name: Link .zshenv
+  file:
+    src: "{{ dotfiles_user_home }}/.config/zsh/zshenv"
+    dest: "{{ dotfiles_user_home }}/.zshenv"
+    state: link
+    force: yes
+
+- name: Check for .zprofile
+  stat: path="{{ dotfiles_user_home }}/.zprofile"
+  register: zprofile_stat
+- name: Back up .zprofile
+  command: mv ~/.zprofile ~/.zprofile.bak
+  args:
+    creates: "{{ dotfiles_user_home }}/.zprofile.bak"
+  when: zprofile_stat.stat.exists and not zprofile_stat.stat.islnk
+- name: Link .zprofile
+  file:
+    src: "{{ dotfiles_user_home }}/.config/zsh/zprofile"
+    dest: "{{ dotfiles_user_home }}/.zprofile"
+    state: link
+    force: yes
+
 - name: Create hushlogin file
   file:
     src: "{{ dotfiles_user_home }}/.config/zsh/hushlogin"

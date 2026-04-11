@@ -1,0 +1,2 @@
+# PATH configuration - sourced by all zsh shells
+export PATH="$HOME/.local/bin:$PATH"
