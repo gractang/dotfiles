@@ -19,6 +19,9 @@
 !skills/
 !skills/**
 
+# Keep powerline config
+!.claude-powerline.json
+
 # Keep plugin config (not runtime data)
 !plugins/
 !plugins/config.json

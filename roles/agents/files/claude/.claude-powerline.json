@@ -1,0 +1,58 @@
+{
+  "theme": "rose-pine",
+  "display": {
+    "padding": 1,
+    "style": "powerline",
+    "charset": "unicode",
+    "colorCompatibility": "truecolor",
+    "autoWrap": true,
+    "lines": [
+      {
+        "segments": {
+          "directory": {
+            "enabled": true,
+            "style": "fish"
+          },
+          "git": {
+            "enabled": true,
+            "showSha": false,
+            "showWorkingTree": true,
+            "showOperation": true,
+            "showTag": false,
+            "showTimeSinceCommit": false,
+            "showStashCount": false,
+            "showUpstream": true,
+            "showRepoName": false
+          },
+          "model": {
+            "enabled": true
+          },
+          "context": {
+            "enabled": true,
+            "showPercentageOnly": true
+          },
+          "session": {
+            "enabled": true,
+            "type": "both",
+            "costSource": "calculated"
+          },
+          "metrics": {
+            "enabled": false
+          },
+          "block": {
+            "enabled": false
+          },
+          "version": {
+            "enabled": false
+          },
+          "today": {
+            "enabled": false
+          },
+          "tmux": {
+            "enabled": false
+          }
+        }
+      }
+    ]
+  }
+}
