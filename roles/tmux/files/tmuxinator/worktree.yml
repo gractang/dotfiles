@@ -1,0 +1,11 @@
+name: <%= @args[0] || "worktree" %>
+root: <%= ENV["WORKTREE_ROOT"] || "." %>
+
+windows:
+  - nvim: nvim
+  - claude:
+      layout: even-horizontal
+      panes:
+        - claude
+        - claude
+  - zsh: ~
