@@ -1,21 +1,41 @@
 {
   "permissions": {
     "allow": [
-      "Bash(git show *)",
-      "Bash(git log *)",
-      "Bash(git log *|*)",
-      "Bash(git diff *)",
-      "Bash(git diff *|*)",
-      "Bash(git status)",
-      "Bash(git branch *)",
-      "Bash(ls *)",
-      "Bash(ls)",
       "Bash(/Users/gracetang/.claude/skills/remindme/scripts/remind.sh *)",
+      "Bash(direnv allow)",
       "Bash(echo \"terminal-notifier*)",
       "Bash(echo *| at *)",
-      "Read(claude/**)",
-      "Read(.claude/**)"
-    ]
+      "Bash(git branch *)",
+      "Bash(git diff *)",
+      "Bash(git diff *|*)",
+      "Bash(git log *)",
+      "Bash(git log *|*)",
+      "Bash(git show *)",
+      "Bash(git status)",
+      "Bash(hdev build:common)",
+      "Bash(hdev check-types)",
+      "Bash(hdev gql:*)",
+      "Bash(hdev install:*)",
+      "Bash(hdev lint:*)",
+      "Bash(hdev -F @hex/ai-sdk lint:*)",
+      "Bash(hdev -F @hex/client lint:*)",
+      "Bash(hdev -F @hex/common lint:*)",
+      "Bash(hdev -F @hex/dev-tools lint:*)",
+      "Bash(hdev -F @hex/server lint:*)",
+      "Bash(hdev -F @hex/server-db lint:*)",
+      "Bash(hdev -F @hex/service-common lint:*)",
+      "Bash(hdev -F @hex/sidecar lint:*)",
+      "Bash(hdev -F @hex/stripe-api lint:*)",
+      "Bash(hdev:*)",
+      "Bash(ls *)",
+      "Bash(ls)",
+      "Bash(sdm status:*)",
+      "Bash(system_profiler SPBluetoothDataType)",
+      "Bash(tmuxinator start worktree:*)",
+      "Read(.claude/**)",
+      "Read(claude/**)"
+    ],
+    "defaultMode": "auto"
   },
   "model": "opus[1m]",
   "hooks": {
@@ -70,46 +90,6 @@
             "async": true
           }
         ]
-      },
-      {
-        "matcher": "Write|Edit",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "node \"/Users/gracetang/.claude/hooks/gsd-prompt-guard.js\"",
-            "timeout": 5
-          }
-        ]
-      },
-      {
-        "matcher": "Write|Edit",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "node \"/Users/gracetang/.claude/hooks/gsd-read-guard.js\"",
-            "timeout": 5
-          }
-        ]
-      },
-      {
-        "matcher": "Write|Edit",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "node \"/Users/gracetang/.claude/hooks/gsd-workflow-guard.js\"",
-            "timeout": 5
-          }
-        ]
-      },
-      {
-        "matcher": "Bash",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "bash /Users/gracetang/.claude/hooks/gsd-validate-commit.sh",
-            "timeout": 5
-          }
-        ]
       }
     ],
     "SessionEnd": [
@@ -132,22 +112,6 @@
             "type": "command",
             "command": "/opt/homebrew/bin/cms internal hook --socket /var/folders/q7/bys9dr7d1wj1q0f3689g_sdr0000gn/T/cms-501.sock session-start",
             "timeout": 10
-          }
-        ]
-      },
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "node \"/Users/gracetang/.claude/hooks/gsd-check-update.js\""
-          }
-        ]
-      },
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "bash /Users/gracetang/.claude/hooks/gsd-session-state.sh"
           }
         ]
       }
@@ -175,33 +139,19 @@
           }
         ]
       }
-    ],
-    "PostToolUse": [
-      {
-        "matcher": "Bash|Edit|Write|MultiEdit|Agent|Task",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "node \"/Users/gracetang/.claude/hooks/gsd-context-monitor.js\"",
-            "timeout": 10
-          }
-        ]
-      },
-      {
-        "matcher": "Write|Edit",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "bash /Users/gracetang/.claude/hooks/gsd-phase-boundary.sh",
-            "timeout": 5
-          }
-        ]
-      }
     ]
   },
   "statusLine": {
     "type": "command",
     "command": "npx -y @owloops/claude-powerline@latest --config=~/.claude/.claude-powerline.json"
+  },
+  "enabledPlugins": {
+    "codex@openai-codex": true,
+    "code-review@claude-plugins-official": true,
+    "frontend-design@claude-plugins-official": true,
+    "lua-lsp@claude-plugins-official": true,
+    "rust-analyzer-lsp@claude-plugins-official": true,
+    "typescript-lsp@claude-plugins-official": true
   },
   "extraKnownMarketplaces": {
     "openai-codex": {
@@ -211,12 +161,7 @@
       }
     }
   },
-  "enabledPlugins": {
-    "codex@openai-codex": true,
-    "code-review@claude-plugins-official": true,
-    "frontend-design@claude-plugins-official": true,
-    "lua-lsp@claude-plugins-official": true,
-    "rust-analyzer-lsp@claude-plugins-official": true,
-    "typescript-lsp@claude-plugins-official": true
-  }
+  "effortLevel": "xhigh",
+  "theme": "dark",
+  "skipAutoPermissionPrompt": true
 }
