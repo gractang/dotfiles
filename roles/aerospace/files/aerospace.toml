@@ -96,6 +96,7 @@ preset = 'qwerty'
 3 = 'main'
 4 = ['secondary', 'main']
 5 = ['secondary', 'main']
+6 = ['secondary', 'main']
 
 [gaps]
 inner.horizontal = 10
@@ -162,6 +163,25 @@ cmd-shift-ctrl-alt-space = 'layout floating tiling'
 ### --- Terminal ---
 cmd-shift-ctrl-alt-n = 'exec-and-forget open -n -a Ghostty'
 
+### --- Dismiss Notifications ---
+cmd-shift-ctrl-alt-x = '''exec-and-forget osascript -e '
+tell application "System Events"
+    tell process "NotificationCenter"
+        set theWindows to every window
+        repeat with aWindow in theWindows
+            try
+                set theActions to every action of aWindow
+                repeat with anAction in theActions
+                    if name of anAction is "Close" or name of anAction is "Clear All" then
+                        perform anAction
+                    end if
+                end repeat
+            end try
+        end repeat
+    end tell
+end tell'
+'''
+
 ### --- Fullscreen ---
 cmd-shift-ctrl-alt-f = 'fullscreen'
 
@@ -175,6 +195,7 @@ cmd-shift-ctrl-alt-2 = 'workspace 2'
 cmd-shift-ctrl-alt-3 = 'workspace 3'
 cmd-shift-ctrl-alt-4 = 'workspace 4'
 cmd-shift-ctrl-alt-5 = 'workspace 5'
+cmd-shift-ctrl-alt-6 = 'workspace 6'
 alt-tab = 'workspace-back-and-forth'
 
 ### --- Move Window to Workspace (and follow) ---
@@ -208,4 +229,5 @@ esc = ['mode main', 'exec-and-forget ~/.config/sketchybar/plugins/aerospace_mode
 3 = 'move-node-to-workspace 3 --focus-follows-window'
 4 = 'move-node-to-workspace 4 --focus-follows-window'
 5 = 'move-node-to-workspace 5 --focus-follows-window'
+6 = 'move-node-to-workspace 6 --focus-follows-window'
 esc = ['mode main', 'exec-and-forget ~/.config/sketchybar/plugins/aerospace_mode.sh main']
