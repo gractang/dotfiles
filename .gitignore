@@ -22,3 +22,6 @@ roles/agents/files/codex/skills/.system/
 # karabiner generated files
 roles/karabiner/files/assets/
 roles/karabiner/files/automatic_backups/
+
+# sketchybar user-local data
+roles/sketchybar/files/wifi_networks.conf

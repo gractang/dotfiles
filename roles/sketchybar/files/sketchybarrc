@@ -104,12 +104,42 @@ source "$ITEM_DIR/front_app.sh"
 ##### Adding Right Items #####
 sketchybar --add item clock right \
   --set clock update_freq=10 script="$PLUGIN_DIR/clock.sh" \
+  --add item spacer.1 right \
+  --set spacer.1 width=12 icon.drawing=off label.drawing=off background.drawing=off padding_left=0 padding_right=0 \
   --add item volume right \
   --set volume script="$PLUGIN_DIR/volume.sh" \
   --subscribe volume volume_change \
   --add item battery right \
   --set battery update_freq=120 script="$PLUGIN_DIR/battery.sh" \
-  --subscribe battery system_woke power_source_change
+  --subscribe battery system_woke power_source_change \
+  --add item spacer.2 right \
+  --set spacer.2 width=12 icon.drawing=off label.drawing=off background.drawing=off padding_left=0 padding_right=0 \
+  --add item bluetooth right \
+  --set bluetooth update_freq=5 script="$PLUGIN_DIR/bluetooth.sh" \
+  --subscribe bluetooth system_woke \
+  --add item wifi right \
+  --set wifi update_freq=10 script="$PLUGIN_DIR/wifi.sh" \
+  --subscribe wifi system_woke wifi_change
+
+##### Right Side Brackets #####
+sketchybar --add bracket time_group clock \
+  --set time_group \
+    background.color=0x55000000 \
+    background.corner_radius=8 \
+    background.height=26 \
+    background.drawing=on \
+  --add bracket status_group volume battery \
+  --set status_group \
+    background.color=0x55000000 \
+    background.corner_radius=8 \
+    background.height=26 \
+    background.drawing=on \
+  --add bracket devices_group wifi bluetooth \
+  --set devices_group \
+    background.color=0x55000000 \
+    background.corner_radius=8 \
+    background.height=26 \
+    background.drawing=on
 
 ##### Force all scripts to run the first time (never do this in a script) #####
 sketchybar --update
