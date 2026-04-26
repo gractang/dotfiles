@@ -8,6 +8,15 @@ trust_level = "trusted"
 [plugins."slack@openai-curated"]
 enabled = true
 
+[projects."/Users/gracetang/dotfiles"]
+trust_level = "trusted"
+
+[projects."/Users/gracetang/projects/bazaar"]
+trust_level = "trusted"
+
+# GSD Agent Configuration — managed by get-shit-done installer
+# GSD codex_hooks ownership: section
+
 [plugins."notion@openai-curated"]
 enabled = true
 

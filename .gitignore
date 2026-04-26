@@ -18,6 +18,13 @@ roles/agents/files/codex/.tmp/
 roles/agents/files/codex/tmp/
 roles/agents/files/codex/.personality_migration
 roles/agents/files/codex/skills/.system/
+roles/agents/files/codex/.codex-global-state.json
+roles/agents/files/codex/history.jsonl
+roles/agents/files/codex/installation_id
+roles/agents/files/codex/session_index.jsonl
+roles/agents/files/codex/sessions/
+roles/agents/files/codex/sqlite/
+roles/agents/files/codex/vendor_imports/
 
 # karabiner generated files
 roles/karabiner/files/assets/
