@@ -69,3 +69,5 @@
 	default = current
 [init]
 	defaultBranch = main
+[git-town]
+	sync-feature-strategy = rebase
