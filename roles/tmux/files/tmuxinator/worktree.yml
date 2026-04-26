@@ -6,6 +6,10 @@ windows:
   - claude:
       layout: even-horizontal
       panes:
-        - claude
-        - claude
-  - zsh: ~
+        - <%= ENV["CLAUDE_LEFT_CMD"] || "claude" %>
+        - <%= ENV["CLAUDE_RIGHT_CMD"] || "claude" %>
+  - zsh:
+      layout: even-horizontal
+      panes:
+        - ~
+        - ~
