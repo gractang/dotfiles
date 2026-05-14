@@ -1,4 +1,8 @@
-after-startup-command = ['exec-and-forget sketchybar']
+after-startup-command = [
+  'exec-and-forget sketchybar',
+  'exec-and-forget ~/.config/aerospace/route_workspaces.sh',
+  'exec-and-forget ~/.config/aerospace/window_state_watcher.sh',
+]
 
 # Notify Sketchybar about workspace change
 exec-on-workspace-change = ['/bin/bash', '-c',
@@ -91,12 +95,15 @@ preset = 'qwerty'
 #                 Monitor pattern is the same as for 'workspace-to-monitor-force-assignment'.
 #                 See: https://nikitabobko.github.io/AeroSpace/guide#assign-workspaces-to-monitors
 [workspace-to-monitor-force-assignment]
-1 = 'main'
-2 = 'main'
-3 = 'main'
-4 = ['secondary', 'main']
-5 = ['secondary', 'main']
-6 = ['secondary', 'main']
+1 = ['DELL U3223QE \(2\)', 'main']
+2 = ['DELL U3223QE \(2\)', 'main']
+3 = ['DELL U3223QE \(2\)', 'main']
+4 = ['DELL U3223QE \(1\)', 'secondary', 'main']
+5 = ['DELL U3223QE \(1\)', 'secondary', 'main']
+6 = ['DELL U3223QE \(1\)', 'secondary', 'main']
+7 = ['Built-in Retina Display', 'main']
+8 = ['Built-in Retina Display', 'main']
+9 = ['Built-in Retina Display', 'main']
 
 [gaps]
 inner.horizontal = 10
@@ -196,6 +203,9 @@ cmd-shift-ctrl-alt-3 = 'workspace 3'
 cmd-shift-ctrl-alt-4 = 'workspace 4'
 cmd-shift-ctrl-alt-5 = 'workspace 5'
 cmd-shift-ctrl-alt-6 = 'workspace 6'
+cmd-shift-ctrl-alt-7 = 'workspace 7'
+cmd-shift-ctrl-alt-8 = 'workspace 8'
+cmd-shift-ctrl-alt-9 = 'workspace 9'
 alt-tab = 'workspace-back-and-forth'
 
 ### --- Move Window to Workspace (and follow) ---
@@ -230,4 +240,7 @@ esc = ['mode main', 'exec-and-forget ~/.config/sketchybar/plugins/aerospace_mode
 4 = 'move-node-to-workspace 4 --focus-follows-window'
 5 = 'move-node-to-workspace 5 --focus-follows-window'
 6 = 'move-node-to-workspace 6 --focus-follows-window'
+7 = 'move-node-to-workspace 7 --focus-follows-window'
+8 = 'move-node-to-workspace 8 --focus-follows-window'
+9 = 'move-node-to-workspace 9 --focus-follows-window'
 esc = ['mode main', 'exec-and-forget ~/.config/sketchybar/plugins/aerospace_mode.sh main']
