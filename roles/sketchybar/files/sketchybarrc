@@ -4,7 +4,7 @@ ITEM_DIR="$CONFIG_DIR/items"
 source "$CONFIG_DIR/colors.sh"
 
 ##### Bar Appearance #####
-sketchybar --bar position=top height=40 radius=30 color=$BAR_COLOR
+sketchybar --bar position=top height=40 corner_radius=30 color=$BAR_COLOR
 
 ##### Changing Defaults #####
 default=(
@@ -89,7 +89,7 @@ sketchybar --add item space_windows_updater left \
   --subscribe space_windows_updater aerospace_workspace_change
 
 # Load Icons on startup for all monitors
-for monitor in $(aerospace list-monitors); do
+for monitor in $(aerospace list-monitors --format "%{monitor-id}"); do
   for sid in $(aerospace list-workspaces --monitor "$monitor" --empty no); do
     apps=$(aerospace list-windows --workspace "$sid" | awk -F'|' '{gsub(/^ *| *$/, "", $2); print $2}')
 

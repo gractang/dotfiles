@@ -1,6 +1,6 @@
 #!/bin/sh
 
 if [ "$SENDER" = "front_app_switched" ]; then
-  app=$(aerospace list-windows | awk -F'|' '$1 ~ /true/ { gsub(/^ *| *$/, "", $3); print $3 }')
+  app=$(aerospace list-windows --focused --format "%{app-name}")
   sketchybar --set "$NAME" label="$app"
 fi

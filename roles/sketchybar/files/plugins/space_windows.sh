@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if [ "$SENDER" = "aerospace_workspace_change" ]; then
-  workspaces=$(aerospace list-workspaces --format "%{id} %{workspace-is-visible}" | grep "true" | awk '{print $1}')
+  workspaces=$(aerospace list-workspaces --all --format "%{workspace} %{workspace-is-visible}" | grep "true" | awk '{print $1}')
 
   # Also update the workspace we just left
   if [ -n "$PREV_WORKSPACE" ]; then
