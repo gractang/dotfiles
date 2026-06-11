@@ -41,11 +41,20 @@ sketchybar --add item mode_indicator left \
 ##### Adding aerospace layouts #####
 sketchybar --add event aerospace_workspace_change
 
-display_id=1
-for monitor in $(aerospace list-monitors --format "%{monitor-appkit-nsscreen-screens-id}"); do
+# Sketchybar enumerates displays main-first (CGGetActiveDisplayList order),
+# while AeroSpace enumerates left-to-right by monitor-id. Build a translation:
+# main display -> sketchybar display 1, then non-main monitors in
+# left-to-right order -> 2, 3, ...
+ordered_monitors=$(aerospace list-monitors --format "%{monitor-id}|%{monitor-appkit-nsscreen-screens-id}" | \
+  awk -F'|' 'BEGIN{main=""; others=""}
+             {if ($2 == 1) main=$1; else others=others " " $1}
+             END{print main others}')
+
+sketchybar_display=1
+for monitor in $ordered_monitors; do
   for sid in $(aerospace list-workspaces --monitor "$monitor"); do
     sketchybar --add item space.$sid left \
-      --set space.$sid display="$display_id" \
+      --set space.$sid display="$sketchybar_display" \
       --subscribe space.$sid aerospace_workspace_change \
       --set space.$sid \
       drawing=on \
@@ -69,7 +78,7 @@ for monitor in $(aerospace list-monitors --format "%{monitor-appkit-nsscreen-scr
       click_script="aerospace workspace $sid" \
       script="$CONFIG_DIR/plugins/aerospace.sh $sid"
   done
-  display_id=$((display_id + 1))
+  sketchybar_display=$((sketchybar_display + 1))
 done
 
 # Update icons on workspace change
@@ -119,7 +128,13 @@ sketchybar --add item clock right \
   --subscribe bluetooth system_woke \
   --add item wifi right \
   --set wifi update_freq=10 script="$PLUGIN_DIR/wifi.sh" \
-  --subscribe wifi system_woke wifi_change
+  --subscribe wifi system_woke wifi_change \
+  --add event display_change \
+  --add item aerospace_router right \
+  --set aerospace_router \
+    drawing=off \
+    script="$HOME/.config/aerospace/route_workspaces.sh" \
+  --subscribe aerospace_router display_change
 
 ##### Right Side Brackets #####
 sketchybar --add bracket time_group clock \
