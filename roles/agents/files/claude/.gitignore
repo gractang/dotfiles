@@ -15,6 +15,10 @@
 !agents/
 !agents/**
 
+# Keep commands (slash commands)
+!commands/
+!commands/**
+
 # Keep skills
 !skills/
 !skills/**
